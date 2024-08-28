@@ -1,6 +1,6 @@
 # Azure Cache for Redis
 
-This terraform module streamlines the setup and management of Azure Cache for Redis, providing customizable configurations for the Redis Cache itself, as well as creating access policies and assignments and firewall rules.
+This terraform module streamlines the setup and management of Azure Cache for Redis, providing customizable configurations for the Redis Cache itself, as well as creating access policies, access policy assignments and firewall rules.
 
 ## Goals
 
@@ -27,7 +27,7 @@ End-to-end testing is not conducted on these modules, as they are individual com
 - Create and manage Azure Redis Cache
 - Configure Access Policies and Access Policy Assignemnts
 - Add firewall rules
-- Add linked Azure Redis Cache
+- Add linked server
 
 ## Requirements
 

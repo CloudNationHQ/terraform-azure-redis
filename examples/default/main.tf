@@ -11,7 +11,7 @@ module "rg" {
 
   groups = {
     demo = {
-      name   = module.naming.resource_group.name
+      name     = module.naming.resource_group.name
       location = "westeurope"
     }
   }
@@ -21,12 +21,12 @@ module "redis" {
   source = "../../"
 
   cache = {
-    name = module.naming.redis_cache.name
+    name           = module.naming.redis_cache.name
     resource_group = module.rg.groups.demo.name
-    location = module.rg.groups.demo.location
-    sku_name = "Basic"
-    capacity = 1
-    family = "C"
-    redis_version = "6"
+    location       = module.rg.groups.demo.location
+    sku_name       = "Basic"
+    capacity       = 1
+    family         = "C"
+    redis_version  = "6"
   }
 }

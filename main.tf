@@ -1,22 +1,22 @@
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_redis_cache" "redis" {
-  name                               = var.cache.name
-  location                           = coalesce(lookup(var.cache, "location", null), var.location)
-  resource_group_name                = coalesce(lookup(var.cache, "resource_group", null), var.resource_group)
-  capacity                           = var.cache.capacity
-  family                             = var.cache.family
-  sku_name                           = var.cache.sku_name
-  enable_non_ssl_port                = try(var.cache.enable_non_ssl_port, false)
-  minimum_tls_version                = try(var.cache.minimum_tls_versio, "1.2")
-  private_static_ip_address          = try(var.cache.private_static_ip_address, null)
-  public_network_access_enabled      = try(var.cache.public_network_access_enabled, true)
-  replicas_per_master                = try(var.cache.replicas_per_master, null)
-  replicas_per_primary               = try(var.cache.replicas_per_primary, null)
-  redis_version                      = try(var.cache.redis_version, "6")
-  shard_count                        = try(var.cache.shard_count, null)
-  subnet_id                          = try(var.cache.subnet_id, null)
-  zones                              = try(var.cache.zones, null)
+  name                          = var.cache.name
+  location                      = coalesce(lookup(var.cache, "location", null), var.location)
+  resource_group_name           = coalesce(lookup(var.cache, "resource_group", null), var.resource_group)
+  capacity                      = var.cache.capacity
+  family                        = var.cache.family
+  sku_name                      = var.cache.sku_name
+  enable_non_ssl_port           = try(var.cache.enable_non_ssl_port, false)
+  minimum_tls_version           = try(var.cache.minimum_tls_versio, "1.2")
+  private_static_ip_address     = try(var.cache.private_static_ip_address, null)
+  public_network_access_enabled = try(var.cache.public_network_access_enabled, true)
+  replicas_per_master           = try(var.cache.replicas_per_master, null)
+  replicas_per_primary          = try(var.cache.replicas_per_primary, null)
+  redis_version                 = try(var.cache.redis_version, "6")
+  shard_count                   = try(var.cache.shard_count, null)
+  subnet_id                     = try(var.cache.subnet_id, null)
+  zones                         = try(var.cache.zones, null)
 
   dynamic "redis_configuration" {
     for_each = lookup(var.cache, "redis_configuration", null) != null ? [var.cache.redis_configuration] : []
@@ -103,7 +103,7 @@ resource "azurerm_redis_firewall_rule" "fwr" {
     for key, rule in try(var.cache.firewall_rules, {}) : key => rule
   }
 
-  name                = try(each.value.name, join("_", [var.naming.redis_firewall_rule, each.key]))
+  name = try(each.value.name, join("_", [var.naming.redis_firewall_rule, each.key]))
   # name                = try(each.value.name, each.key)
   redis_cache_name    = azurerm_redis_cache.redis.name
   resource_group_name = coalesce(lookup(var.cache, "resource_group", null), var.resource_group)
