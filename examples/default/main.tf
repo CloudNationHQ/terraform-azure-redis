@@ -18,7 +18,8 @@ module "rg" {
 }
 
 module "redis" {
-  source = "../../"
+  source = "cloudnationhq/redis/azure"
+  version = "~> 1.0"
 
   cache = {
     name           = module.naming.redis_cache.name
