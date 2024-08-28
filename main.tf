@@ -7,12 +7,12 @@ resource "azurerm_redis_cache" "redis" {
   capacity                           = var.cache.capacity
   family                             = var.cache.family
   sku_name                           = var.cache.sku_name
-  access_keys_authentication_enabled = try(var.cache.access_keys_authentication_enabled, true)
-  non_ssl_port_enabled               = try(var.cache.non_ssl_port_enabled, false)
+  enable_non_ssl_port                = try(var.cache.enable_non_ssl_port, false)
   minimum_tls_version                = try(var.cache.minimum_tls_versio, "1.2")
   private_static_ip_address          = try(var.cache.private_static_ip_address, null)
   public_network_access_enabled      = try(var.cache.public_network_access_enabled, true)
   replicas_per_master                = try(var.cache.replicas_per_master, null)
+  replicas_per_primary               = try(var.cache.replicas_per_primary, null)
   redis_version                      = try(var.cache.redis_version, "6")
   shard_count                        = try(var.cache.shard_count, null)
   subnet_id                          = try(var.cache.subnet_id, null)
@@ -24,7 +24,7 @@ resource "azurerm_redis_cache" "redis" {
       aof_backup_enabled                      = try(redis_configuration.value.aof_backup_enabled, false)
       aof_storage_connection_string_0         = try(redis_configuration.value.aof_storage_connection_string_0, null)
       aof_storage_connection_string_1         = try(redis_configuration.value.aof_storage_connection_string_1, null)
-      authentication_enabled                  = try(redis_configuration.value.authentication_enabled, true)
+      enable_authentication                   = try(redis_configuration.value.enable_authentication, true)
       active_directory_authentication_enabled = try(redis_configuration.value.active_directory_authentication_enabled, false)
       maxmemory_reserved                      = try(redis_configuration.value.maxmemory_reserved, null)
       maxmemory_delta                         = try(redis_configuration.value.maxmemory_delta, null)
@@ -98,14 +98,27 @@ resource "azurerm_redis_cache_access_policy_assignment" "apa" {
   object_id_alias    = each.value.object_id_alias
 }
 
-resource "azurerm_redis_firewall_rule" "firewall" {
+resource "azurerm_redis_firewall_rule" "fwr" {
   for_each = {
     for key, rule in try(var.cache.firewall_rules, {}) : key => rule
   }
 
-  name                = try(each.value.name, each.key)
+  name                = try(each.value.name, join("_", [var.naming.redis_firewall_rule, each.key]))
+  # name                = try(each.value.name, each.key)
   redis_cache_name    = azurerm_redis_cache.redis.name
   resource_group_name = coalesce(lookup(var.cache, "resource_group", null), var.resource_group)
   start_ip            = each.value.start_ip
   end_ip              = each.value.end_ip
+}
+
+resource "azurerm_redis_linked_server" "ls" {
+  for_each = {
+    for key, ls in try(var.cache.linked_server, {}) : key => ls
+  }
+
+  target_redis_cache_name     = each.value.target_redis_cache_name
+  resource_group_name         = each.value.resource_group_name
+  linked_redis_cache_id       = each.value.linked_redis_cache_id
+  linked_redis_cache_location = each.value.linked_redis_cache_location
+  server_role                 = each.value.server_role
 }
