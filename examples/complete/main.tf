@@ -38,7 +38,7 @@ module "vnet" {
 }
 
 module "redis" {
-  source = "cloudnationhq/redis/azure"
+  source  = "cloudnationhq/redis/azure"
   version = "~> 1.0"
 
   naming = local.naming
