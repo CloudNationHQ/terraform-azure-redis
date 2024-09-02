@@ -2,7 +2,7 @@ module "naming" {
   source  = "cloudnationhq/naming/azure"
   version = "~> 0.13"
 
-  suffix = ["redis", "default"]
+  suffix = ["demo", "dev"]
 }
 
 module "rg" {
@@ -12,13 +12,13 @@ module "rg" {
   groups = {
     demo = {
       name     = module.naming.resource_group.name
-      location = "westeurope"
+      location = "germanywestcentral"
     }
   }
 }
 
 module "redis" {
-  source = "cloudnationhq/redis/azure"
+  source  = "cloudnationhq/redis/azure"
   version = "~> 1.0"
 
   cache = {
@@ -28,6 +28,5 @@ module "redis" {
     sku_name       = "Basic"
     capacity       = 1
     family         = "C"
-    redis_version  = "6"
   }
 }

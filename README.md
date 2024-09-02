@@ -1,6 +1,6 @@
-# Azure Cache for Redis
+# Redis Cache
 
-This terraform module streamlines the setup and management of Azure Cache for Redis, providing customizable configurations for the Redis Cache itself, as well as creating access policies, access policy assignments and firewall rules.
+This Terraform module simplifies the setup and management of azure Redis Cache, offering customizable configurations for creating and maintaining redis instances. It ensures a high-performance and scalable in-memory data store, optimized for low-latency and high-throughput applications in the cloud.
 
 ## Goals
 
@@ -24,10 +24,10 @@ End-to-end testing is not conducted on these modules, as they are individual com
 
 ## Features
 
-- Create and manage Azure Redis Cache
-- Configure Access Policies and Access Policy Assignemnts
-- Add firewall rules
-- Add linked server
+- Configures access policies and assignments for secure access control.
+- Adds firewall rules for enhanced network security.
+- Supports linked servers for seamless replication and high availability.
+- Utilization of terratest for robust validation.
 
 ## Requirements
 
@@ -69,8 +69,8 @@ End-to-end testing is not conducted on these modules, as they are individual com
 | Name | Description |
 | :-- | :-- |
 | `cache` | contains all redis cache configuration |
-| `ap` | contains access policy configuration |
-| `apa` | contains access policy assignment configuration |
+| `access_policy` | contains access policy configuration |
+| `access_policy_assignment` | contains access policy assignment configuration |
 | `user_assigned_identities` | contains user assigned identity information |
 
 ## Testing
@@ -101,11 +101,11 @@ Module is maintained by [these awesome contributors](https://github.com/cloudnat
 
 We welcome contributions from the community! Whether it's reporting a bug, suggesting a new feature, or submitting a pull request, your input is highly valued.
 
-For more information, please see our contribution [guidelines](https://github.com/CloudNationHQ/terraform-azure-redis/blob/main/CONTRIBUTING.md).
+For more information, please see our contribution [guidelines](./CONTRIBUTING.md).
 
 ## License
 
-MIT Licensed. See [LICENSE](https://github.com/cloudnationhq/terraform-azure-redis/blob/main/LICENSE) for full details.
+MIT Licensed. See [LICENSE](./LICENSE) for full details.
 
 ## References
 
