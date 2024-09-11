@@ -1,5 +1,5 @@
 variable "cache" {
-  description = "describes the synapse workspace configuration"
+  description = "describes the redis cache configuration"
   type        = any
 }
 
