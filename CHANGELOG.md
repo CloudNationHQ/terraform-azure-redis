@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/CloudNationHQ/terraform-azure-redis/compare/v1.0.1...v1.0.2) (2024-09-12)
+
+
+### Bug Fixes
+
+* remove reference to synapse ([#7](https://github.com/CloudNationHQ/terraform-azure-redis/issues/7)) ([0261dab](https://github.com/CloudNationHQ/terraform-azure-redis/commit/0261dabbb28abef3dcbc58ef756316a604a9b53e))
+
 ## [1.0.1](https://github.com/CloudNationHQ/terraform-azure-redis/compare/v1.0.0...v1.0.1) (2024-09-11)
 
 
