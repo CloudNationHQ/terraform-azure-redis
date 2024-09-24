@@ -7,7 +7,7 @@ module "naming" {
 
 module "rg" {
   source  = "cloudnationhq/rg/azure"
-  version = "~> 1.0"
+  version = "~> 2.0"
 
   groups = {
     demo = {
@@ -19,7 +19,7 @@ module "rg" {
 
 module "vnet" {
   source  = "cloudnationhq/vnet/azure"
-  version = "~> 3.0"
+  version = "~> 4.0"
 
   naming = local.naming
 
@@ -39,7 +39,7 @@ module "vnet" {
 
 module "redis" {
   source  = "cloudnationhq/redis/azure"
-  version = "~> 1.0"
+  version = "~> 2.0"
 
   naming = local.naming
 
