@@ -9,7 +9,7 @@
 
 ### Features
 
-* upgrade azurerm provder to v4 ([#9](https://github.com/CloudNationHQ/terraform-azure-redis/issues/9)) ([67da887](https://github.com/CloudNationHQ/terraform-azure-redis/commit/67da887dae373596e8a599be3336fe939e89c686))
+* upgrade azurerm provider to v4 ([#9](https://github.com/CloudNationHQ/terraform-azure-redis/issues/9)) ([67da887](https://github.com/CloudNationHQ/terraform-azure-redis/commit/67da887dae373596e8a599be3336fe939e89c686))
 
 ### Upgrade from v1.0.2 to v2.0.0:
 
