@@ -7,7 +7,7 @@ module "naming" {
 
 module "rg" {
   source  = "cloudnationhq/rg/azure"
-  version = "~> 1.0"
+  version = "~> 2.0"
 
   groups = {
     demo = {
@@ -19,7 +19,7 @@ module "rg" {
 
 module "redis" {
   source  = "cloudnationhq/redis/azure"
-  version = "~> 1.0"
+  version = "~> 2.0"
 
   cache = {
     name           = module.naming.redis_cache.name
