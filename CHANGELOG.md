@@ -5,11 +5,15 @@
 
 ### ⚠ BREAKING CHANGES
 
-* * Version 4 of the azurerm provider includes breaking changes.
+* Version 4 of the azurerm provider includes breaking changes.
 
 ### Features
 
 * upgrade azurerm provder to v4 ([#9](https://github.com/CloudNationHQ/terraform-azure-redis/issues/9)) ([67da887](https://github.com/CloudNationHQ/terraform-azure-redis/commit/67da887dae373596e8a599be3336fe939e89c686))
+
+### Upgrade from v1.0.2 to v2.0.0:
+
+- Update module reference to: `version = "~> 2.0"`
 
 ## [1.0.2](https://github.com/CloudNationHQ/terraform-azure-redis/compare/v1.0.1...v1.0.2) (2024-09-12)
 
