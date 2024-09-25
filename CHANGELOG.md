@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/CloudNationHQ/terraform-azure-redis/compare/v2.0.0...v2.0.1) (2024-09-25)
+
+
+### Bug Fixes
+
+* fix global tags and updated documentation ([#11](https://github.com/CloudNationHQ/terraform-azure-redis/issues/11)) ([f5dd69d](https://github.com/CloudNationHQ/terraform-azure-redis/commit/f5dd69d39d01fa9ce66b0c38bc0bd84602cec0a1))
+
 ## [2.0.0](https://github.com/CloudNationHQ/terraform-azure-redis/compare/v1.0.2...v2.0.0) (2024-09-24)
 
 
