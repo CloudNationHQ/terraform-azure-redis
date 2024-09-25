@@ -61,7 +61,7 @@ resource "azurerm_redis_cache" "redis" {
     }
   }
 
-  tags = try(var.cache.tags, {})
+  tags = try(var.cache.tags, var.tags)
 
 }
 
@@ -75,7 +75,7 @@ resource "azurerm_user_assigned_identity" "identity" {
   name                = try(each.value.name, "uai-${var.cache.name}")
   resource_group_name = var.cache.resource_group
   location            = var.cache.location
-  tags                = try(each.value.tags, var.tags, null)
+  tags                = try(each.value.tags, var.tags)
 }
 
 resource "azurerm_redis_cache_access_policy" "ap" {
