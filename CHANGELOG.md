@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.0](https://github.com/CloudNationHQ/terraform-azure-redis/compare/v2.0.1...v2.1.0) (2024-10-11)
+
+
+### Features
+
+* auto generated docs and refine makefile ([#14](https://github.com/CloudNationHQ/terraform-azure-redis/issues/14)) ([0e0276f](https://github.com/CloudNationHQ/terraform-azure-redis/commit/0e0276fb0945374760b64b3acc440bbb1188f822))
+* **deps:** bump github.com/gruntwork-io/terratest in /tests ([#13](https://github.com/CloudNationHQ/terraform-azure-redis/issues/13)) ([52474f6](https://github.com/CloudNationHQ/terraform-azure-redis/commit/52474f68d6d7572b2124afe1e57d9179c2217499))
+
 ## [2.0.1](https://github.com/CloudNationHQ/terraform-azure-redis/compare/v2.0.0...v2.0.1) (2024-09-25)
 
 
