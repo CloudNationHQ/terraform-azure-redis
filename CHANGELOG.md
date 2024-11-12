@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/CloudNationHQ/terraform-azure-redis/compare/v2.1.0...v2.2.0) (2024-11-12)
+
+
+### Features
+
+* enhance testing with sequential, parallel modes and flags for exceptions and skip-destroy ([#16](https://github.com/CloudNationHQ/terraform-azure-redis/issues/16)) ([4beefd2](https://github.com/CloudNationHQ/terraform-azure-redis/commit/4beefd26030c26a5aabf456246a54e6c13e2e418))
+
 ## [2.1.0](https://github.com/CloudNationHQ/terraform-azure-redis/compare/v2.0.1...v2.1.0) (2024-10-11)
 
 
