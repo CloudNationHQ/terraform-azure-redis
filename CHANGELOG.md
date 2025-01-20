@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.3.0](https://github.com/CloudNationHQ/terraform-azure-redis/compare/v2.2.0...v2.3.0) (2025-01-20)
+
+
+### Features
+
+* **deps:** bump github.com/gruntwork-io/terratest in /tests ([#19](https://github.com/CloudNationHQ/terraform-azure-redis/issues/19)) ([0b822cc](https://github.com/CloudNationHQ/terraform-azure-redis/commit/0b822cc0b70bb0d48729324145d4f8703bba051b))
+* **deps:** bump golang.org/x/crypto from 0.29.0 to 0.31.0 in /tests ([#22](https://github.com/CloudNationHQ/terraform-azure-redis/issues/22)) ([17d38a3](https://github.com/CloudNationHQ/terraform-azure-redis/commit/17d38a3c77b2f1de54ca6cd0c49458df59b9d3af))
+* **deps:** bump golang.org/x/net from 0.31.0 to 0.33.0 in /tests ([#23](https://github.com/CloudNationHQ/terraform-azure-redis/issues/23)) ([2e57e23](https://github.com/CloudNationHQ/terraform-azure-redis/commit/2e57e230b4f02f5b1bd314c1f206d51f26ac0779))
+* remove temporary files when deployment tests fails ([#20](https://github.com/CloudNationHQ/terraform-azure-redis/issues/20)) ([8d846dc](https://github.com/CloudNationHQ/terraform-azure-redis/commit/8d846dcfa6d4173c1dacc59b6d4a4c7f8ed29f65))
+
 ## [2.2.0](https://github.com/CloudNationHQ/terraform-azure-redis/compare/v2.1.0...v2.2.0) (2024-11-12)
 
 
