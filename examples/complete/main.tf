@@ -44,7 +44,7 @@ module "redis" {
   naming = local.naming
 
   cache = {
-    name           = module.naming.redis_cache.name
+    name           = module.naming.redis_cache.name_unique
     resource_group = module.rg.groups.demo.name
     location       = module.rg.groups.demo.location
     sku_name       = "Premium"
