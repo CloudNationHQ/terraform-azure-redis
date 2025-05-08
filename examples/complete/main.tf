@@ -30,7 +30,7 @@ module "vnet" {
     address_space  = ["10.0.0.0/16"]
     subnets = {
       sn1 = {
-        cidr = ["10.0.0.0/24"]
+        address_prefixes = ["10.0.0.0/24"]
         nsg  = {}
       }
     }
