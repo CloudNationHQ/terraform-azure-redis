@@ -2,78 +2,179 @@
 
 This Terraform module simplifies the setup and management of azure Redis Cache, offering customizable configurations for creating and maintaining redis instances. It ensures a high-performance and scalable in-memory data store, optimized for low-latency and high-throughput applications in the cloud.
 
-## Goals
-
-The main objective is to create a more logic data structure, achieved by combining and grouping related resources together in a complex object.
-
-The structure of the module promotes reusability. It's intended to be a repeatable component, simplifying the process of building diverse workloads and platform accelerators consistently.
-
-A primary goal is to utilize keys and values in the object that correspond to the REST API's structure. This enables us to carry out iterations, increasing its practical value as time goes on.
-
-A last key goal is to separate logic from configuration in the module, thereby enhancing its scalability, ease of customization, and manageability.
-
-## Non-Goals
-
-These modules are not intended to be complete, ready-to-use solutions; they are designed as components for creating your own patterns.
-
-They are not tailored for a single use case but are meant to be versatile and applicable to a range of scenarios.
-
-Security standardization is applied at the pattern level, while the modules include default values based on best practices but do not enforce specific security standards.
-
-End-to-end testing is not conducted on these modules, as they are individual components and do not undergo the extensive testing reserved for complete patterns or solutions.
-
 ## Features
 
-- Configures access policies and assignments for secure access control.
-- Adds firewall rules for enhanced network security.
-- Supports linked servers for seamless replication and high availability.
-- Utilization of terratest for robust validation.
+Configures access policies and assignments for secure access control.
+
+Adds firewall rules for enhanced network security.
+
+Supports linked servers for seamless replication and high availability.
+
+Utilization of terratest for robust validation.
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
-| Name | Version |
-|------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.0 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~> 4.0 |
+The following requirements are needed by this module:
+
+- <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) (~> 1.0)
+
+- <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (~> 4.0)
 
 ## Providers
 
-| Name | Version |
-|------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | ~> 4.0 |
+The following providers are used by this module:
+
+- <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) (~> 4.0)
 
 ## Resources
 
-| Name | Type |
-|------|------|
-| [azurerm_redis_cache.redis](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache) | resource |
-| [azurerm_redis_cache_access_policy.ap](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache_access_policy) | resource |
-| [azurerm_redis_cache_access_policy_assignment.apa](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache_access_policy_assignment) | resource |
-| [azurerm_redis_firewall_rule.fwr](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_firewall_rule) | resource |
-| [azurerm_redis_linked_server.ls](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_linked_server) | resource |
-| [azurerm_user_assigned_identity.identity](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/user_assigned_identity) | resource |
-| [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config) | data source |
+The following resources are used by this module:
 
-## Inputs
+- [azurerm_redis_cache.redis](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache) (resource)
+- [azurerm_redis_cache_access_policy.ap](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache_access_policy) (resource)
+- [azurerm_redis_cache_access_policy_assignment.apa](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache_access_policy_assignment) (resource)
+- [azurerm_redis_firewall_rule.fwr](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_firewall_rule) (resource)
+- [azurerm_redis_linked_server.ls](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_linked_server) (resource)
+- [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config) (data source)
 
-| Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| <a name="input_cache"></a> [cache](#input\_cache) | describes the redis cache configuration | `any` | n/a | yes |
-| <a name="input_location"></a> [location](#input\_location) | default azure region to be used. | `string` | `null` | no |
-| <a name="input_naming"></a> [naming](#input\_naming) | contains naming convention | `map(string)` | `{}` | no |
-| <a name="input_resource_group"></a> [resource\_group](#input\_resource\_group) | default resource group to be used. | `string` | `null` | no |
-| <a name="input_tags"></a> [tags](#input\_tags) | tags to be added to the resources | `map(string)` | `{}` | no |
+## Required Inputs
+
+The following input variables are required:
+
+### <a name="input_cache"></a> [cache](#input\_cache)
+
+Description: Contains all redis cache configuration
+
+Type:
+
+```hcl
+object({
+    name                          = string
+    location                      = optional(string, null)
+    resource_group_name           = optional(string, null)
+    capacity                      = number
+    family                        = string
+    sku_name                      = string
+    non_ssl_port_enabled          = optional(bool, false)
+    minimum_tls_version           = optional(string, "1.2")
+    private_static_ip_address     = optional(string, null)
+    public_network_access_enabled = optional(bool, true)
+    replicas_per_master           = optional(number, null)
+    replicas_per_primary          = optional(number, null)
+    redis_version                 = optional(string, "6")
+    shard_count                   = optional(number, null)
+    subnet_id                     = optional(string, null)
+    zones                         = optional(list(string), null)
+    tags                          = optional(map(string))
+    redis_configuration = optional(object({
+      aof_backup_enabled                      = optional(bool, false)
+      aof_storage_connection_string_0         = optional(string, null)
+      aof_storage_connection_string_1         = optional(string, null)
+      authentication_enabled                  = optional(bool, true)
+      active_directory_authentication_enabled = optional(bool, false)
+      maxmemory_reserved                      = optional(number, null)
+      maxmemory_delta                         = optional(number, null)
+      maxmemory_policy                        = optional(string, "volatile-lru")
+      data_persistence_authentication_method  = optional(string, null)
+      maxfragmentationmemory_reserved         = optional(number, null)
+      rdb_backup_enabled                      = optional(bool, false)
+      rdb_backup_frequency                    = optional(number, null)
+      rdb_backup_max_snapshot_count           = optional(number, null)
+      rdb_storage_connection_string           = optional(string, null)
+      storage_account_subscription_id         = optional(string, null)
+      notify_keyspace_events                  = optional(string, null)
+    }), null)
+    identity = optional(object({
+      type         = string
+      identity_ids = optional(list(string), null)
+    }), null)
+    patch_schedule = optional(object({
+      day_of_week        = string
+      start_hour_utc     = number
+      maintenance_window = optional(string, "PT5H")
+    }), null)
+    access_policy = optional(map(object({
+      name        = optional(string, null)
+      permissions = string
+    })), {})
+    access_policy_assignment = optional(map(object({
+      name               = optional(string, null)
+      access_policy_name = string
+      object_id          = optional(string, null)
+      object_id_alias    = string
+    })), {})
+    firewall_rules = optional(map(object({
+      name     = optional(string, null)
+      start_ip = string
+      end_ip   = string
+    })), {})
+    linked_server = optional(map(object({
+      target_redis_cache_name     = string
+      resource_group_name         = string
+      linked_redis_cache_id       = string
+      linked_redis_cache_location = string
+      server_role                 = string
+    })), {})
+  })
+```
+
+## Optional Inputs
+
+The following input variables are optional (have default values):
+
+### <a name="input_location"></a> [location](#input\_location)
+
+Description: default azure region to be used.
+
+Type: `string`
+
+Default: `null`
+
+### <a name="input_naming"></a> [naming](#input\_naming)
+
+Description: contains naming convention
+
+Type: `map(string)`
+
+Default: `{}`
+
+### <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name)
+
+Description: default resource group to be used.
+
+Type: `string`
+
+Default: `null`
+
+### <a name="input_tags"></a> [tags](#input\_tags)
+
+Description: tags to be added to the resources
+
+Type: `map(string)`
+
+Default: `{}`
 
 ## Outputs
 
-| Name | Description |
-|------|-------------|
-| <a name="output_access_policy"></a> [access\_policy](#output\_access\_policy) | contains all redis cache access policy configuration |
-| <a name="output_access_policy_assignment"></a> [access\_policy\_assignment](#output\_access\_policy\_assignment) | contains all redis cache access policy assignment configuration |
-| <a name="output_cache"></a> [cache](#output\_cache) | contains all redis cache configuration |
-| <a name="output_user_assigned_identities"></a> [user\_assigned\_identities](#output\_user\_assigned\_identities) | contains all user assigned identities configuration |
+The following outputs are exported:
+
+### <a name="output_access_policy"></a> [access\_policy](#output\_access\_policy)
+
+Description: contains all redis cache access policy configuration
+
+### <a name="output_access_policy_assignment"></a> [access\_policy\_assignment](#output\_access\_policy\_assignment)
+
+Description: contains all redis cache access policy assignment configuration
+
+### <a name="output_cache"></a> [cache](#output\_cache)
+
+Description: contains all redis cache configuration
 <!-- END_TF_DOCS -->
+
+## Goals
+
+For more information, please see our [goals and non-goals](./GOALS.md).
 
 ## Testing
 
@@ -87,15 +188,15 @@ Full examples detailing all usages, along with integrations with dependency modu
 
 To update the module's documentation run `make doc`
 
-## Authors
-
-Module is maintained by [these awesome contributors](https://github.com/cloudnationhq/terraform-azure-redis/graphs/contributors).
-
-## Contributing
+## Contributors
 
 We welcome contributions from the community! Whether it's reporting a bug, suggesting a new feature, or submitting a pull request, your input is highly valued.
 
-For more information, please see our contribution [guidelines](./CONTRIBUTING.md).
+For more information, please see our contribution [guidelines](./CONTRIBUTING.md). <br><br>
+
+<a href="https://github.com/cloudnationhq/terraform-azure-redis/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=cloudnationhq/terraform-azure-redis" />
+</a>
 
 ## License
 
