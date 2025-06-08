@@ -11,6 +11,13 @@
 
 * small refactor ([#30](https://github.com/CloudNationHQ/terraform-azure-redis/issues/30)) ([6619305](https://github.com/CloudNationHQ/terraform-azure-redis/commit/661930584150fc74d09b0f7edddd0f43d2777beb))
 
+### Upgrade from v2.3.0 to v3.0.0:
+
+- Update module reference to: `version = "~> 3.0"`
+- The user assigned identity is removed from the module.
+  - For identity we created a separate module.
+- The property and variable resource_group is renamed to resource_group_name
+
 ## [2.3.0](https://github.com/CloudNationHQ/terraform-azure-redis/compare/v2.2.0...v2.3.0) (2025-01-20)
 
 
