@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.1.0](https://github.com/CloudNationHQ/terraform-azure-redis/compare/v3.0.0...v3.1.0) (2025-11-12)
+
+
+### Features
+
+* **deps:** bump github.com/ulikunitz/xz from 0.5.10 to 0.5.14 in /tests ([#34](https://github.com/CloudNationHQ/terraform-azure-redis/issues/34)) ([b1da8af](https://github.com/CloudNationHQ/terraform-azure-redis/commit/b1da8af5b39835236d6da604612cbae7e8e602d8))
+* remove redundant null values ([#39](https://github.com/CloudNationHQ/terraform-azure-redis/issues/39)) ([6d8f073](https://github.com/CloudNationHQ/terraform-azure-redis/commit/6d8f0737a812e9d72b53fb0712cc1c3b110f44b7))
+
 ## [3.0.0](https://github.com/CloudNationHQ/terraform-azure-redis/compare/v2.3.0...v3.0.0) (2025-06-06)
 
 
