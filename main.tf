@@ -12,20 +12,22 @@ resource "azurerm_redis_cache" "redis" {
     ), var.location
   )
 
-  name                          = var.cache.name
-  capacity                      = var.cache.capacity
-  family                        = var.cache.family
-  sku_name                      = var.cache.sku_name
-  non_ssl_port_enabled          = var.cache.non_ssl_port_enabled
-  minimum_tls_version           = var.cache.minimum_tls_version
-  private_static_ip_address     = var.cache.private_static_ip_address
-  public_network_access_enabled = var.cache.public_network_access_enabled
-  replicas_per_master           = var.cache.replicas_per_master
-  replicas_per_primary          = var.cache.replicas_per_primary
-  redis_version                 = var.cache.redis_version
-  shard_count                   = var.cache.shard_count
-  subnet_id                     = var.cache.subnet_id
-  zones                         = var.cache.zones
+  name                               = var.cache.name
+  capacity                           = var.cache.capacity
+  family                             = var.cache.family
+  sku_name                           = var.cache.sku_name
+  access_keys_authentication_enabled = var.cache.access_keys_authentication_enabled
+  non_ssl_port_enabled               = var.cache.non_ssl_port_enabled
+  minimum_tls_version                = var.cache.minimum_tls_version
+  private_static_ip_address          = var.cache.private_static_ip_address
+  public_network_access_enabled      = var.cache.public_network_access_enabled
+  replicas_per_master                = var.cache.replicas_per_master
+  replicas_per_primary               = var.cache.replicas_per_primary
+  redis_version                      = var.cache.redis_version
+  shard_count                        = var.cache.shard_count
+  subnet_id                          = var.cache.subnet_id
+  zones                              = var.cache.zones
+  tenant_settings                    = var.cache.tenant_settings
 
   dynamic "redis_configuration" {
     for_each = lookup(var.cache, "redis_configuration", null) != null ? [var.cache.redis_configuration] : []
