@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.2.0](https://github.com/CloudNationHQ/terraform-azure-redis/compare/v3.1.0...v3.2.0) (2026-01-16)
+
+
+### Features
+
+* add tenant_settings & active_directory_authentication_enabled to redis cache configuration ([#45](https://github.com/CloudNationHQ/terraform-azure-redis/issues/45)) ([aa6c742](https://github.com/CloudNationHQ/terraform-azure-redis/commit/aa6c7423cdf6d425447d440fb2852117459bef32))
+* **deps:** bump github.com/cloudnationhq/az-cn-go-validor in /tests ([#43](https://github.com/CloudNationHQ/terraform-azure-redis/issues/43)) ([06a805f](https://github.com/CloudNationHQ/terraform-azure-redis/commit/06a805f1dcf15333b8b26441f96d87934e77d8e3))
+* **deps:** bump golang.org/x/crypto from 0.36.0 to 0.45.0 in /tests ([#41](https://github.com/CloudNationHQ/terraform-azure-redis/issues/41)) ([e2d3525](https://github.com/CloudNationHQ/terraform-azure-redis/commit/e2d3525bc478b337321d3b5c49d09881e36187f1))
+
 ## [3.1.0](https://github.com/CloudNationHQ/terraform-azure-redis/compare/v3.0.0...v3.1.0) (2025-11-12)
 
 
