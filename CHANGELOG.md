@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.3.0](https://github.com/CloudNationHQ/terraform-azure-redis/compare/v3.2.0...v3.3.0) (2026-03-16)
+
+
+### Features
+
+* **deps:** bump github.com/cloudnationhq/az-cn-go-validor in /tests ([#47](https://github.com/CloudNationHQ/terraform-azure-redis/issues/47)) ([75b52c3](https://github.com/CloudNationHQ/terraform-azure-redis/commit/75b52c3ff3213883abca317c21f9f4016b0f431f))
+* **deps:** bump github.com/cloudnationhq/az-cn-go-validor in /tests ([#50](https://github.com/CloudNationHQ/terraform-azure-redis/issues/50)) ([824625a](https://github.com/CloudNationHQ/terraform-azure-redis/commit/824625adfa274fc906995a746e3a74d239fa6a9c))
+
 ## [3.2.0](https://github.com/CloudNationHQ/terraform-azure-redis/compare/v3.1.0...v3.2.0) (2026-01-16)
 
 
