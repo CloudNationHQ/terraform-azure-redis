@@ -50,23 +50,25 @@ Type:
 
 ```hcl
 object({
-    name                          = string
-    location                      = optional(string)
-    resource_group_name           = optional(string)
-    capacity                      = number
-    family                        = string
-    sku_name                      = string
-    non_ssl_port_enabled          = optional(bool, false)
-    minimum_tls_version           = optional(string, "1.2")
-    private_static_ip_address     = optional(string)
-    public_network_access_enabled = optional(bool, true)
-    replicas_per_master           = optional(number)
-    replicas_per_primary          = optional(number)
-    redis_version                 = optional(string, "6")
-    shard_count                   = optional(number)
-    subnet_id                     = optional(string)
-    zones                         = optional(list(string))
-    tags                          = optional(map(string))
+    name                               = string
+    location                           = optional(string)
+    resource_group_name                = optional(string)
+    capacity                           = number
+    family                             = string
+    sku_name                           = string
+    access_keys_authentication_enabled = optional(bool, true)
+    non_ssl_port_enabled               = optional(bool, false)
+    minimum_tls_version                = optional(string, "1.2")
+    private_static_ip_address          = optional(string)
+    public_network_access_enabled      = optional(bool, true)
+    replicas_per_master                = optional(number)
+    replicas_per_primary               = optional(number)
+    redis_version                      = optional(string, "6")
+    shard_count                        = optional(number)
+    subnet_id                          = optional(string)
+    zones                              = optional(list(string))
+    tenant_settings                    = optional(map(string))
+    tags                               = optional(map(string))
     redis_configuration = optional(object({
       aof_backup_enabled                      = optional(bool, false)
       aof_storage_connection_string_0         = optional(string)
@@ -170,6 +172,14 @@ Description: contains all redis cache access policy assignment configuration
 ### <a name="output_cache"></a> [cache](#output\_cache)
 
 Description: contains all redis cache configuration
+
+### <a name="output_firewall_rules"></a> [firewall\_rules](#output\_firewall\_rules)
+
+Description: contains all redis cache firewall rule configuration
+
+### <a name="output_linked_server"></a> [linked\_server](#output\_linked\_server)
+
+Description: contains all redis cache linked server configuration
 <!-- END_TF_DOCS -->
 
 ## Goals
