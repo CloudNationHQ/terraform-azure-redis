@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.4.0](https://github.com/CloudNationHQ/terraform-azure-redis/compare/v3.3.0...v3.4.0) (2026-06-11)
+
+
+### Features
+
+* **deps:** bump github.com/cloudnationhq/az-cn-go-validor in /tests ([#52](https://github.com/CloudNationHQ/terraform-azure-redis/issues/52)) ([026f89d](https://github.com/CloudNationHQ/terraform-azure-redis/commit/026f89d6b01e2cb1e921f44f704ae61bd75c7294))
+
+
+### Bug Fixes
+
+* reference correct identity_ids attribute in identity block ([#55](https://github.com/CloudNationHQ/terraform-azure-redis/issues/55)) ([5c71bc6](https://github.com/CloudNationHQ/terraform-azure-redis/commit/5c71bc653b00e9b439f38026ea04f75dbaaad7a1))
+
 ## [3.3.0](https://github.com/CloudNationHQ/terraform-azure-redis/compare/v3.2.0...v3.3.0) (2026-04-03)
 
 
