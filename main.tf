@@ -57,7 +57,7 @@ resource "azurerm_redis_cache" "redis" {
 
     content {
       type         = identity.value.type
-      identity_ids = identity.value.identity_idsmain
+      identity_ids = identity.value.identity_ids
     }
   }
 
