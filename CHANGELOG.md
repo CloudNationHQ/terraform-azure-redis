@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.5.0](https://github.com/CloudNationHQ/terraform-azure-redis/compare/v3.4.0...v3.5.0) (2026-07-10)
+
+
+### Features
+
+* **deps:** bump golang.org/x/crypto from 0.45.0 to 0.52.0 in /tests ([#56](https://github.com/CloudNationHQ/terraform-azure-redis/issues/56)) ([387c94c](https://github.com/CloudNationHQ/terraform-azure-redis/commit/387c94c3b9b0a622cafd721ca9f1d1dce3ef32f5))
+
 ## [3.4.0](https://github.com/CloudNationHQ/terraform-azure-redis/compare/v3.3.0...v3.4.0) (2026-06-11)
 
 
