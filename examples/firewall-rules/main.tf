@@ -28,5 +28,17 @@ module "redis" {
     sku_name            = "Basic"
     capacity            = 1
     family              = "C"
+
+    firewall_rules = {
+      office = {
+        start_ip = "10.0.0.0"
+        end_ip   = "10.0.0.255"
+      }
+      vpn = {
+        name     = "redis_vpn"
+        start_ip = "172.16.0.1"
+        end_ip   = "172.16.0.10"
+      }
+    }
   }
 }

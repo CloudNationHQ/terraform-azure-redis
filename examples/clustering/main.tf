@@ -25,8 +25,9 @@ module "redis" {
     name                = module.naming.redis_cache.name_unique
     resource_group_name = module.rg.groups.demo.name
     location            = module.rg.groups.demo.location
-    sku_name            = "Basic"
+    sku_name            = "Premium"
     capacity            = 1
-    family              = "C"
+    family              = "P"
+    shard_count         = 3
   }
 }

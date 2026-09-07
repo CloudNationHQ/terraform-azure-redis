@@ -19,24 +19,24 @@ The following requirements are needed by this module:
 
 - <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) (~> 1.0)
 
-- <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (~> 4.0)
+- <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (~> 5.0)
 
 ## Providers
 
 The following providers are used by this module:
 
-- <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) (~> 4.0)
+- <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) (~> 5.0)
 
 ## Resources
 
 The following resources are used by this module:
 
-- [azurerm_redis_cache.redis](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache) (resource)
-- [azurerm_redis_cache_access_policy.ap](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache_access_policy) (resource)
-- [azurerm_redis_cache_access_policy_assignment.apa](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache_access_policy_assignment) (resource)
-- [azurerm_redis_firewall_rule.fwr](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_firewall_rule) (resource)
-- [azurerm_redis_linked_server.ls](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_linked_server) (resource)
-- [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config) (data source)
+- [azurerm_redis_cache.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache) (resource)
+- [azurerm_redis_cache_access_policy.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache_access_policy) (resource)
+- [azurerm_redis_cache_access_policy_assignment.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache_access_policy_assignment) (resource)
+- [azurerm_redis_firewall_rule.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_firewall_rule) (resource)
+- [azurerm_redis_linked_server.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_linked_server) (resource)
+- [azurerm_client_config.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config) (data source)
 
 ## Required Inputs
 
@@ -56,31 +56,31 @@ object({
     capacity                           = number
     family                             = string
     sku_name                           = string
-    access_keys_authentication_enabled = optional(bool, true)
+    access_keys_authentication_enabled = optional(bool)
     non_ssl_port_enabled               = optional(bool, false)
-    minimum_tls_version                = optional(string, "1.2")
+    minimum_tls_version                = optional(string)
     private_static_ip_address          = optional(string)
-    public_network_access_enabled      = optional(bool, true)
+    public_network_access_enabled      = optional(bool)
     replicas_per_master                = optional(number)
     replicas_per_primary               = optional(number)
-    redis_version                      = optional(string, "6")
+    redis_version                      = optional(string)
     shard_count                        = optional(number)
     subnet_id                          = optional(string)
     zones                              = optional(list(string))
     tenant_settings                    = optional(map(string))
     tags                               = optional(map(string))
     redis_configuration = optional(object({
-      aof_backup_enabled                      = optional(bool, false)
+      aof_backup_enabled                      = optional(bool)
       aof_storage_connection_string_0         = optional(string)
       aof_storage_connection_string_1         = optional(string)
-      authentication_enabled                  = optional(bool, true)
-      active_directory_authentication_enabled = optional(bool, false)
+      authentication_enabled                  = optional(bool)
+      active_directory_authentication_enabled = optional(bool)
       maxmemory_reserved                      = optional(number)
       maxmemory_delta                         = optional(number)
-      maxmemory_policy                        = optional(string, "volatile-lru")
+      maxmemory_policy                        = optional(string)
       data_persistence_authentication_method  = optional(string)
       maxfragmentationmemory_reserved         = optional(number)
-      rdb_backup_enabled                      = optional(bool, false)
+      rdb_backup_enabled                      = optional(bool)
       rdb_backup_frequency                    = optional(number)
       rdb_backup_max_snapshot_count           = optional(number)
       rdb_storage_connection_string           = optional(string)
@@ -91,11 +91,11 @@ object({
       type         = string
       identity_ids = optional(list(string))
     }))
-    patch_schedule = optional(object({
+    patch_schedule = optional(map(object({
       day_of_week        = string
-      start_hour_utc     = number
-      maintenance_window = optional(string, "PT5H")
-    }))
+      start_hour_utc     = optional(number)
+      maintenance_window = optional(string)
+    })), {})
     access_policy = optional(map(object({
       name        = optional(string)
       permissions = string
@@ -112,8 +112,8 @@ object({
       end_ip   = string
     })), {})
     linked_server = optional(map(object({
-      target_redis_cache_name     = string
-      resource_group_name         = string
+      target_redis_cache_name     = optional(string)
+      resource_group_name         = optional(string)
       linked_redis_cache_id       = string
       linked_redis_cache_location = string
       server_role                 = string
@@ -132,14 +132,6 @@ Description: default azure region to be used.
 Type: `string`
 
 Default: `null`
-
-### <a name="input_naming"></a> [naming](#input\_naming)
-
-Description: contains naming convention
-
-Type: `map(string)`
-
-Default: `{}`
 
 ### <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name)
 
@@ -202,11 +194,7 @@ To update the module's documentation run `make doc`
 
 We welcome contributions from the community! Whether it's reporting a bug, suggesting a new feature, or submitting a pull request, your input is highly valued.
 
-For more information, please see our contribution [guidelines](./CONTRIBUTING.md). <br><br>
-
-<a href="https://github.com/cloudnationhq/terraform-azure-redis/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=cloudnationhq/terraform-azure-redis" />
-</a>
+For more information, please see our contribution [guidelines](./CONTRIBUTING.md).
 
 ## License
 
@@ -216,4 +204,3 @@ MIT Licensed. See [LICENSE](./LICENSE) for full details.
 
 - [Documentation](https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/cache-overview)
 - [Rest Api](https://learn.microsoft.com/en-us/rest/api/redis)
-- [Rest Api Specs](https://github.com/Azure/azure-rest-api-specs/tree/main/specification/redis)

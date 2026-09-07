@@ -25,8 +25,20 @@ module "redis" {
     name                = module.naming.redis_cache.name_unique
     resource_group_name = module.rg.groups.demo.name
     location            = module.rg.groups.demo.location
-    sku_name            = "Basic"
+    sku_name            = "Standard"
     capacity            = 1
     family              = "C"
+
+    patch_schedule = {
+      sunday = {
+        day_of_week        = "Sunday"
+        start_hour_utc     = 0
+        maintenance_window = "PT5H"
+      }
+      wednesday = {
+        day_of_week    = "Wednesday"
+        start_hour_utc = 2
+      }
+    }
   }
 }

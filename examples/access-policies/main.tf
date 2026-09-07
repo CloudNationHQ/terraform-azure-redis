@@ -25,8 +25,29 @@ module "redis" {
     name                = module.naming.redis_cache.name_unique
     resource_group_name = module.rg.groups.demo.name
     location            = module.rg.groups.demo.location
-    sku_name            = "Basic"
+    sku_name            = "Standard"
     capacity            = 1
     family              = "C"
+
+    redis_configuration = {
+      active_directory_authentication_enabled = true
+    }
+
+    access_policy = {
+      readonly = {
+        name        = "demo-readonly"
+        permissions = "+@read +@connection +cluster|info"
+      }
+      readwrite = {
+        permissions = "+@read +@write +@connection"
+      }
+    }
+
+    access_policy_assignment = {
+      current_user = {
+        access_policy_name = "readwrite"
+        object_id_alias    = "CurrentUser"
+      }
+    }
   }
 }
