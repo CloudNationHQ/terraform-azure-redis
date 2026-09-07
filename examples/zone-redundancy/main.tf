@@ -22,11 +22,13 @@ module "redis" {
   version = "~> 4.0"
 
   cache = {
-    name                = module.naming.redis_cache.name_unique
-    resource_group_name = module.rg.groups.demo.name
-    location            = module.rg.groups.demo.location
-    sku_name            = "Basic"
-    capacity            = 1
-    family              = "C"
+    name                 = module.naming.redis_cache.name_unique
+    resource_group_name  = module.rg.groups.demo.name
+    location             = module.rg.groups.demo.location
+    sku_name             = "Premium"
+    capacity             = 1
+    family               = "P"
+    replicas_per_primary = 2
+    zones                = ["1", "2", "3"]
   }
 }

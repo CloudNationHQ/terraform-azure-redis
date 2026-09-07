@@ -7,31 +7,31 @@ variable "cache" {
     capacity                           = number
     family                             = string
     sku_name                           = string
-    access_keys_authentication_enabled = optional(bool, true)
+    access_keys_authentication_enabled = optional(bool)
     non_ssl_port_enabled               = optional(bool, false)
-    minimum_tls_version                = optional(string, "1.2")
+    minimum_tls_version                = optional(string)
     private_static_ip_address          = optional(string)
-    public_network_access_enabled      = optional(bool, true)
+    public_network_access_enabled      = optional(bool)
     replicas_per_master                = optional(number)
     replicas_per_primary               = optional(number)
-    redis_version                      = optional(string, "6")
+    redis_version                      = optional(string)
     shard_count                        = optional(number)
     subnet_id                          = optional(string)
     zones                              = optional(list(string))
     tenant_settings                    = optional(map(string))
     tags                               = optional(map(string))
     redis_configuration = optional(object({
-      aof_backup_enabled                      = optional(bool, false)
+      aof_backup_enabled                      = optional(bool)
       aof_storage_connection_string_0         = optional(string)
       aof_storage_connection_string_1         = optional(string)
-      authentication_enabled                  = optional(bool, true)
-      active_directory_authentication_enabled = optional(bool, false)
+      authentication_enabled                  = optional(bool)
+      active_directory_authentication_enabled = optional(bool)
       maxmemory_reserved                      = optional(number)
       maxmemory_delta                         = optional(number)
-      maxmemory_policy                        = optional(string, "volatile-lru")
+      maxmemory_policy                        = optional(string)
       data_persistence_authentication_method  = optional(string)
       maxfragmentationmemory_reserved         = optional(number)
-      rdb_backup_enabled                      = optional(bool, false)
+      rdb_backup_enabled                      = optional(bool)
       rdb_backup_frequency                    = optional(number)
       rdb_backup_max_snapshot_count           = optional(number)
       rdb_storage_connection_string           = optional(string)
@@ -42,11 +42,11 @@ variable "cache" {
       type         = string
       identity_ids = optional(list(string))
     }))
-    patch_schedule = optional(object({
+    patch_schedule = optional(map(object({
       day_of_week        = string
-      start_hour_utc     = number
-      maintenance_window = optional(string, "PT5H")
-    }))
+      start_hour_utc     = optional(number)
+      maintenance_window = optional(string)
+    })), {})
     access_policy = optional(map(object({
       name        = optional(string)
       permissions = string
@@ -63,8 +63,8 @@ variable "cache" {
       end_ip   = string
     })), {})
     linked_server = optional(map(object({
-      target_redis_cache_name     = string
-      resource_group_name         = string
+      target_redis_cache_name     = optional(string)
+      resource_group_name         = optional(string)
       linked_redis_cache_id       = string
       linked_redis_cache_location = string
       server_role                 = string
@@ -82,11 +82,6 @@ variable "cache" {
   }
 }
 
-variable "naming" {
-  description = "contains naming convention"
-  type        = map(string)
-  default     = {}
-}
 
 variable "location" {
   description = "default azure region to be used."

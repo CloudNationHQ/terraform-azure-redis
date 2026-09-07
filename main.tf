@@ -1,15 +1,12 @@
-data "azurerm_client_config" "current" {}
+data "azurerm_client_config" "this" {}
 
-resource "azurerm_redis_cache" "redis" {
+resource "azurerm_redis_cache" "this" {
   resource_group_name = coalesce(
-    lookup(
-      var.cache, "resource_group_name", null
-    ), var.resource_group_name
+    var.cache.resource_group_name, var.resource_group_name
   )
 
   location = coalesce(
-    lookup(var.cache, "location", null
-    ), var.location
+    var.cache.location, var.location
   )
 
   name                               = var.cache.name
@@ -30,7 +27,7 @@ resource "azurerm_redis_cache" "redis" {
   tenant_settings                    = var.cache.tenant_settings
 
   dynamic "redis_configuration" {
-    for_each = lookup(var.cache, "redis_configuration", null) != null ? [var.cache.redis_configuration] : []
+    for_each = var.cache.redis_configuration != null ? { "this" = var.cache.redis_configuration } : {}
 
     content {
       aof_backup_enabled                      = redis_configuration.value.aof_backup_enabled
@@ -53,7 +50,7 @@ resource "azurerm_redis_cache" "redis" {
   }
 
   dynamic "identity" {
-    for_each = lookup(var.cache, "identity", null) != null ? [var.cache.identity] : []
+    for_each = var.cache.identity != null ? { "this" = var.cache.identity } : {}
 
     content {
       type         = identity.value.type
@@ -62,7 +59,7 @@ resource "azurerm_redis_cache" "redis" {
   }
 
   dynamic "patch_schedule" {
-    for_each = lookup(var.cache, "patch_schedule", null) != null ? [var.cache.patch_schedule] : []
+    for_each = var.cache.patch_schedule
 
     content {
       day_of_week        = patch_schedule.value.day_of_week
@@ -76,71 +73,65 @@ resource "azurerm_redis_cache" "redis" {
   )
 }
 
-resource "azurerm_redis_cache_access_policy" "ap" {
-  for_each = {
-    for key, ap in try(var.cache.access_policy, {}) : key => ap
-  }
+resource "azurerm_redis_cache_access_policy" "this" {
+  for_each = var.cache.access_policy
 
   name = coalesce(
     each.value.name, each.key
   )
 
-  redis_cache_id = azurerm_redis_cache.redis.id
+  redis_cache_id = azurerm_redis_cache.this.id
   permissions    = each.value.permissions
 }
 
-resource "azurerm_redis_cache_access_policy_assignment" "apa" {
-  for_each = {
-    for key, apa in try(var.cache.access_policy_assignment, {}) : key => apa
-  }
+resource "azurerm_redis_cache_access_policy_assignment" "this" {
+  for_each = var.cache.access_policy_assignment
 
   name = coalesce(
     each.value.name, each.key
   )
 
-  redis_cache_id     = azurerm_redis_cache.redis.id
+  redis_cache_id     = azurerm_redis_cache.this.id
   access_policy_name = each.value.access_policy_name
   object_id_alias    = each.value.object_id_alias
 
   object_id = coalesce(
-    each.value.object_id, data.azurerm_client_config.current.object_id
+    each.value.object_id, data.azurerm_client_config.this.object_id
   )
 
   depends_on = [
-    azurerm_redis_cache_access_policy.ap
+    azurerm_redis_cache_access_policy.this
   ]
 }
 
-resource "azurerm_redis_firewall_rule" "fwr" {
-  for_each = {
-    for key, rule in try(var.cache.firewall_rules, {}) : key => rule
-  }
+resource "azurerm_redis_firewall_rule" "this" {
+  for_each = var.cache.firewall_rules
 
   name = coalesce(
     each.value.name,
-    try(
-      replace(join("-", [var.naming.redis_firewall_rule, each.key]), "-", "_"), null
-    ), each.key
+    each.key
   )
 
   resource_group_name = coalesce(
-    lookup(
-      var.cache, "resource_group_name", null
-    ), var.resource_group_name
+    var.cache.resource_group_name, var.resource_group_name
   )
 
-  redis_cache_name = azurerm_redis_cache.redis.name
+  redis_cache_name = azurerm_redis_cache.this.name
   start_ip         = each.value.start_ip
   end_ip           = each.value.end_ip
 }
 
-resource "azurerm_redis_linked_server" "ls" {
-  for_each = {
-    for key, ls in try(var.cache.linked_server, {}) : key => ls
-  }
+resource "azurerm_redis_linked_server" "this" {
+  for_each = var.cache.linked_server
 
-  target_redis_cache_name     = each.value.target_redis_cache_name
-  resource_group_name         = each.value.resource_group_name
+  target_redis_cache_name = coalesce(
+    each.value.target_redis_cache_name, azurerm_redis_cache.this.name
+  )
+
+  resource_group_name = coalesce(
+    each.value.resource_group_name, azurerm_redis_cache.this.resource_group_name
+  )
+
   linked_redis_cache_id       = each.value.linked_redis_cache_id
   linked_redis_cache_location = each.value.linked_redis_cache_location
   server_role                 = each.value.server_role
