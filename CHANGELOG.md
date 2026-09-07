@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.0.0](https://github.com/CloudNationHQ/terraform-azure-redis/compare/v3.4.0...v4.0.0) (2026-09-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* this change causes recreates
+
+### Features
+
+* azurerm provider 5 upgrade ([#59](https://github.com/CloudNationHQ/terraform-azure-redis/issues/59)) ([ae52d3a](https://github.com/CloudNationHQ/terraform-azure-redis/commit/ae52d3a590b4356394ef6a3431ede7cc3cc18e43))
+* **deps:** bump golang.org/x/crypto from 0.45.0 to 0.52.0 in /tests ([#56](https://github.com/CloudNationHQ/terraform-azure-redis/issues/56)) ([387c94c](https://github.com/CloudNationHQ/terraform-azure-redis/commit/387c94c3b9b0a622cafd721ca9f1d1dce3ef32f5))
+
 ## [3.4.0](https://github.com/CloudNationHQ/terraform-azure-redis/compare/v3.3.0...v3.4.0) (2026-06-11)
 
 
