@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.0](https://github.com/CloudNationHQ/terraform-azure-redis/compare/v4.0.0...v4.1.0) (2026-10-20)
+
+
+### Features
+
+* **deps:** bump github.com/klauspost/compress in /tests ([#60](https://github.com/CloudNationHQ/terraform-azure-redis/issues/60)) ([3e7303e](https://github.com/CloudNationHQ/terraform-azure-redis/commit/3e7303eea5370d3974cdc39675c9f3775aa845c2))
+
 ## [4.0.0](https://github.com/CloudNationHQ/terraform-azure-redis/compare/v3.4.0...v4.0.0) (2026-09-07)
 
 
